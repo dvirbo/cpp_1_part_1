@@ -12,7 +12,6 @@
 #define CHECK_THROWS DOCTEST_CHECK_THROWS CHECK
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 
-
 using namespace ariel;
 using namespace std;
 
@@ -44,12 +43,35 @@ TEST_CASE("Good input")
 													 @-@@@@@-@\n
 													 @-------@\n
 													 @@@@@@@@@"));
+
+			CHECK(nospaces(mat(3, 5, '@', '-')) == nospaces("@@@\n
+															@-@\n
+															@-@\n
+															@-@\n
+															@@@"));
+
+			CHECK(nospaces(mat(13, 5, '@', '-')) == nospaces("@@@@@@@@@@@@@\n
+															  @-----------@\n
+															  @-@@@@@@@@@-@\n
+															  @-----------@\n
+															  @@@@@@@@@@@@@"));
+
+
+												
 }
 
 TEST_CASE("Bad input")
 {
-	CHECK_THROWS(mat(10, 5, '$', '%'));
-
+	CHECK_THROWS(mat(10, 5, '$', '%')); // "char isn't valid"
+	CHECK_THROWS(mat(3, 5, '@', '%'));	// "char isn't valid"
+	CHECK_THROWS(mat(-3, 5, '@', '-')); // "column num is negetive-must be positive"
 }
 
-/* Add more test cases here */
+TEST_CASE("Bad input-ckeck the err")
+{
+
+	CHECK(nospaces(mat(-1, 7, '@', '-')) == "column num is negetive-must be positive");
+	CHECK(nospaces(mat(3, -7, '@', '-')) == "row num is negetive-must be positive");
+	CHECK(nospaces(mat(3, 7, '@', '-')) == "char isn't valid");
+}
+
