@@ -7,7 +7,7 @@ HEADERS=mat.hpp
 OBJECTS=mat.o
 SOURCES=mat.cpp
 
-run: demo
+run: demo 
 	./$^
 
 demo: Demo.o $(OBJECTS)
