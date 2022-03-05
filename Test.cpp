@@ -9,17 +9,17 @@
  * Date: 2021-02
  */
 
-#define CHECK_THROWS DOCTEST_CHECK_THROWS CHECK
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-
-using namespace ariel;
-using namespace std;
+// #define CHECK_THROWS DOCTEST_CHECK_THROWS CHECK
+// #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 
 #include "doctest.h"
 #include "mat.hpp"
 #include <algorithm>
 #include <string>
 #include <iostream>
+
+using namespace ariel;
+using namespace std;
 
 /**
  * Returns the input string without the whitespace characters: space, newline and tab.
@@ -36,28 +36,21 @@ string nospaces(string input)
 
 TEST_CASE("Good input")
 {
-			CHECK(nospaces(mat(9, 7, '@', '-')) == nospaces("@@@@@@@@@\n
+/* 			CHECK(nospaces(mat(9, 7, '@', '-')) == nospaces("@@@@@@@@@\n
 													 @-------@\n
 													 @-@@@@@-@\n
 													 @-@---@-@\n
 													 @-@@@@@-@\n
 													 @-------@\n
-													 @@@@@@@@@"));
+													 @@@@@@@@@")); */
 
-			CHECK(nospaces(mat(3, 5, '@', '-')) == nospaces("@@@\n
-															@-@\n
-															@-@\n
-															@-@\n
-															@@@"));
+			CHECK(nospaces(mat(3, 5, '@', '-')) == nospaces("@@@@-@@-@@-@@@@"));
 
-			CHECK(nospaces(mat(13, 5, '@', '-')) == nospaces("@@@@@@@@@@@@@\n
+/* 			CHECK(nospaces(mat(13, 5, '@', '-')) == nospaces("@@@@@@@@@@@@@\n
 															  @-----------@\n
 															  @-@@@@@@@@@-@\n
 															  @-----------@\n
-															  @@@@@@@@@@@@@"));
-
-
-												
+															  @@@@@@@@@@@@@")); */
 }
 
 TEST_CASE("Bad input")
@@ -70,8 +63,8 @@ TEST_CASE("Bad input")
 TEST_CASE("Bad input-ckeck the err")
 {
 
-	CHECK(nospaces(mat(-1, 7, '@', '-')) == "column num is negetive-must be positive");
-	CHECK(nospaces(mat(3, -7, '@', '-')) == "row num is negetive-must be positive");
-	CHECK(nospaces(mat(3, 7, '@', '-')) == "char isn't valid");
+/* 	CHECK(nospaces(mat(-1, 7, '@', '-')) == "column num is negetive-must be positive");
+	CHECK(mat(3, -7, '@', '-') == "row num is negetive-must be positive");
+	CHECK(mat(3, 7, '@', '*') == "char isn't valid"); */
+	CHECK_FALSE_MESSAGE(mat(3, 7, '@', '*') , "char isn't valid");
 }
-
