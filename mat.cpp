@@ -1,5 +1,4 @@
 #include <string>
-// #include <bits/stdc++.h>
 #include <exception>
 #include <stdexcept>
 #include <iostream>
@@ -96,9 +95,8 @@ string fill(int row, int col)
         for (j = 0; j < tCol; j++)
         {
             str += mat[i][j];
-            cout << " " << mat[i][j];
         }
-        cout << "\n";
+        str += '\n';
     }
     return str;
 }

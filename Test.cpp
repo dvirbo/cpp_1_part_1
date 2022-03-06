@@ -27,44 +27,86 @@ using namespace std;
  */
 string nospaces(string input)
 {
-	std::erase(input, ' ');
-	std::erase(input, '\t');
-	std::erase(input, '\n');
-	std::erase(input, '\r');
+	erase(input, ' ');
+	erase(input, '\t');
+	erase(input, '\n');
+	erase(input, '\r');
 	return input;
+}
+
+string cval(int col, int row, char a, char b)
+{
+    string ans = "Good input";
+
+    if (col % 2 == 0 || row % 2 == 0)
+    {
+        return "Mat size is always odd";
+    }
+
+    if (col < 0)
+    {
+        return "column num is negetive-must be positive";
+    }
+
+    if (row < 0){
+        return "row num is negetive-must be positive";
+    }
+    if (a != '@' || b != '-')
+    {
+        return "char isn't valid";
+    }
+
+    return ans;
+}
+string check_input(int col, int row, char a, char b){
+	string ans = cval(col, row, a, b);
+	if(ans == "Good input"){
+		return "Good input";
+	}
+	return ans;
 }
 
 TEST_CASE("Good input")
 {
-/* 			CHECK(nospaces(mat(9, 7, '@', '-')) == nospaces("@@@@@@@@@\n
-													 @-------@\n
-													 @-@@@@@-@\n
-													 @-@---@-@\n
-													 @-@@@@@-@\n
-													 @-------@\n
-													 @@@@@@@@@")); */
 
-			CHECK(nospaces(mat(3, 5, '@', '-')) == nospaces("@@@@-@@-@@-@@@@"));
-
-/* 			CHECK(nospaces(mat(13, 5, '@', '-')) == nospaces("@@@@@@@@@@@@@\n
-															  @-----------@\n
-															  @-@@@@@@@@@-@\n
-															  @-----------@\n
-															  @@@@@@@@@@@@@")); */
+	CHECK(nospaces(mat(9, 7, '@', '-'))=="@@@@@@@@@@-------@@-@@@@@-@@-@---@-@@-@@@@@-@@-------@@@@@@@@@@");
+	CHECK(nospaces(mat(3, 5, '@', '-')) == "@@@@-@@-@@-@@@@");
+	CHECK(nospaces(mat(13, 5, '@', '-')) == "@@@@@@@@@@@@@@-----------@@-@@@@@@@@@-@@-----------@@@@@@@@@@@@@@");
+	CHECK(nospaces(mat(1, 1, '@', '-')) == "@");
+	CHECK(nospaces(mat(3, 3, '@', '-')) == "@@@@-@@@@");
 }
 
 TEST_CASE("Bad input")
 {
-	CHECK_THROWS(mat(10, 5, '$', '%')); // "char isn't valid"
-	CHECK_THROWS(mat(3, 5, '@', '%'));	// "char isn't valid"
+	CHECK_THROWS(mat(10, 5, '$', '%')); // "Mat size is always odd"
+	CHECK_THROWS(mat(3, 6, '$', '%'));	// "Mat size is always odd"
+	CHECK_THROWS(mat(3, 5, '$', '-'));	// "char isn't valid"
+	CHECK_THROWS(mat(7, 5, '@', '%'));	// "char isn't valid"
+	CHECK_THROWS(mat(3, -5, '@', '-')); // "row num is negetive-must be positive"
 	CHECK_THROWS(mat(-3, 5, '@', '-')); // "column num is negetive-must be positive"
+	CHECK_THROWS(mat(0, 5, '@', '-'));	// "Mat size is always odd"
+	CHECK_THROWS(mat(3, 0, '@', '-'));	// "Mat size is always odd"
 }
 
-TEST_CASE("Bad input-ckeck the err")
+
+TEST_CASE("false message")
 {
 
-/* 	CHECK(nospaces(mat(-1, 7, '@', '-')) == "column num is negetive-must be positive");
-	CHECK(mat(3, -7, '@', '-') == "row num is negetive-must be positive");
-	CHECK(mat(3, 7, '@', '*') == "char isn't valid"); */
-	CHECK_FALSE_MESSAGE(mat(3, 7, '@', '*') , "char isn't valid");
+	
+	string a = "Mat size is always odd";
+	string b = "char isn't valid";
+	string c = "column num is negetive-must be positive";
+	string d = "row num is negetive-must be positive";
+
+		CHECK_EQ(a,check_input(10, 5, '$', '%'));
+		CHECK_EQ(a,check_input(3, 2, '$', '%'));
+		CHECK_EQ(b,check_input(3, 5, '$', '-'));
+		CHECK_EQ(b,check_input(3, 5, '@', '%'));
+		CHECK_EQ(c,check_input(-1, 5, '$', '%'));
+		CHECK_EQ(d,check_input(3, -5, '$', '%'));
+		CHECK_NE(a,check_input(3, 5, '@', '-'));
+	
 }
+
+
+
