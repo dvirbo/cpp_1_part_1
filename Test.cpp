@@ -24,6 +24,7 @@ using namespace std;
 /**
  * Returns the input string without the whitespace characters: space, newline and tab.
  * Requires std=c++2a.
+ * check_validity
  */
 string nospaces(string input)
 {
