@@ -6,7 +6,10 @@
 
 using namespace std;
 using namespace ariel;
-
+/*
+This method check if the components of the mat are valid by defenition
+return "Good input" if the data is valid, else- return the correct message 
+ */
 string check_validity(int col, int row, char a, char b)
 {
     string ans = "Good input";
@@ -32,7 +35,10 @@ string check_validity(int col, int row, char a, char b)
 
     return ans;
 }
-
+/*
+this method fill the matrix in a way that similar to spiral form
+for more info: https://www.geeksforgeeks.org/print-a-given-matrix-in-spiral-form/
+*/
 string fill(int row, int col)
 {
 

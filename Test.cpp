@@ -67,7 +67,7 @@ string check_input(int col, int row, char a, char b){
 	return ans;
 }
 
-TEST_CASE("Good input")
+TEST_CASE("Good input - Comparison")
 {
 
 	CHECK(nospaces(mat(9, 7, '@', '-'))=="@@@@@@@@@@-------@@-@@@@@-@@-@---@-@@-@@@@@-@@-------@@@@@@@@@@");
@@ -77,7 +77,7 @@ TEST_CASE("Good input")
 	CHECK(nospaces(mat(3, 3, '@', '-')) == "@@@@-@@@@");
 }
 
-TEST_CASE("Bad input")
+TEST_CASE("Bad input and the error that they have")
 {
 	CHECK_THROWS(mat(10, 5, '$', '%')); // "Mat size is always odd"
 	CHECK_THROWS(mat(3, 6, '$', '%'));	// "Mat size is always odd"
@@ -90,7 +90,7 @@ TEST_CASE("Bad input")
 }
 
 
-TEST_CASE("false message")
+TEST_CASE("compare false message")
 {
 
 	
