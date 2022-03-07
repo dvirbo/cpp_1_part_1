@@ -7,7 +7,8 @@
 using namespace std;
 using namespace ariel;
 
-c{
+string check_validity(int col, int row, char a, char b)
+{
     string ans = "Good input";
 
     if (col % 2 == 0 || row % 2 == 0)
