@@ -37,13 +37,13 @@ string fill(int row, int col)
 {
 
     int i = 0;
-    int j = 0;    // iterator
+    int j = 0;   
     int sRow = 0; // starting row index
     int sCol = 0; // starting column index
 
     // Store given number of rows and columns for the printing:
-    int tRow = row;
-    int tCol = col;
+    int tRow = row; // temp val that contain row num 
+    int tCol = col; // temp val that contain col num
 
     char mat[row][col]; // need to fill it
     char sigh = '@';    // init the char
