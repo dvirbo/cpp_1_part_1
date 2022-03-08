@@ -9,7 +9,7 @@ https://codegolf.stackexchange.com/questions/241219/mat-printing-matrix
 To see how the function should work, see the file [Demo.cpp](Demo.cpp)
 
 
-
+# how to run:
 <div dir='ltr'>
 
     make demo
