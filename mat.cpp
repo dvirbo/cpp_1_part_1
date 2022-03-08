@@ -28,18 +28,13 @@ string check_validity(int col, int row, char a, char b)
     {
         return "row num is negetive-must be positive";
     }
-    if (a != '@' || b != '-')
-    {
-        return "char isn't valid";
-    }
-
     return ans;
 }
 /*
 this method fill the matrix in a way that similar to spiral form
 for more info: https://www.geeksforgeeks.org/print-a-given-matrix-in-spiral-form/
 */
-string fill(int row, int col)
+string fill(int row, int col, char a, char b)
 {
 
     int i = 0;
@@ -52,7 +47,7 @@ string fill(int row, int col)
     int tCol = col; // temp val that contain col num
 
     char mat[row][col]; // need to fill it
-    char sigh = '@';    // init the char
+    char sigh = a;    // init the char
     string str;         // the final string that we're return
 
     while (sRow < row && sCol < col)
@@ -93,9 +88,9 @@ string fill(int row, int col)
 
         // change the char for next iteration:
 
-        sigh = (sigh == '-') ? '@' : '-';
+        sigh = (sigh == b) ? a : b;
     }
-    // Print the filled matrix
+    // create the string of the mat
     for (i = 0; i < tRow; i++)
     {
         for (j = 0; j < tCol; j++)
@@ -117,7 +112,7 @@ namespace ariel
         {
             throw invalid_argument(check);
         }
-        string ans = fill(row, col);
+        string ans = fill(row, col, a, b);
         return ans;
     }
 

@@ -52,11 +52,6 @@ string cval(int col, int row, char a, char b)
     if (row < 0){
         return "row num is negetive-must be positive";
     }
-    if (a != '@' || b != '-')
-    {
-        return "char isn't valid";
-    }
-
     return ans;
 }
 string check_input(int col, int row, char a, char b){
@@ -75,14 +70,17 @@ TEST_CASE("Good input - Comparison")
 	CHECK(nospaces(mat(13, 5, '@', '-')) == "@@@@@@@@@@@@@@-----------@@-@@@@@@@@@-@@-----------@@@@@@@@@@@@@@");
 	CHECK(nospaces(mat(1, 1, '@', '-')) == "@");
 	CHECK(nospaces(mat(3, 3, '@', '-')) == "@@@@-@@@@");
+	CHECK(nospaces(mat(3, 3, '*', '-')) == "****-****");
+	CHECK(nospaces(mat(3, 3, '!', '-')) == "!!!!-!!!!");
+
+
+
 }
 
 TEST_CASE("Bad input and the error that they have")
 {
 	CHECK_THROWS(mat(10, 5, '$', '%')); // "Mat size is always odd"
 	CHECK_THROWS(mat(3, 6, '$', '%'));	// "Mat size is always odd"
-	CHECK_THROWS(mat(3, 5, '$', '-'));	// "char isn't valid"
-	CHECK_THROWS(mat(7, 5, '@', '%'));	// "char isn't valid"
 	CHECK_THROWS(mat(3, -5, '@', '-')); // "row num is negetive-must be positive"
 	CHECK_THROWS(mat(-3, 5, '@', '-')); // "column num is negetive-must be positive"
 	CHECK_THROWS(mat(0, 5, '@', '-'));	// "Mat size is always odd"
@@ -92,17 +90,14 @@ TEST_CASE("Bad input and the error that they have")
 
 TEST_CASE("compare false message")
 {
-
-	
 	string a = "Mat size is always odd";
-	string b = "char isn't valid";
 	string c = "column num is negetive-must be positive";
 	string d = "row num is negetive-must be positive";
 
 		CHECK_EQ(a,check_input(10, 5, '$', '%'));
+		CHECK_EQ(a,check_input(2, 5, '$', '%'));
+		CHECK_EQ(a,check_input(10, 5, '$', '%'));
 		CHECK_EQ(a,check_input(3, 2, '$', '%'));
-		CHECK_EQ(b,check_input(3, 5, '$', '-'));
-		CHECK_EQ(b,check_input(3, 5, '@', '%'));
 		CHECK_EQ(c,check_input(-1, 5, '$', '%'));
 		CHECK_EQ(d,check_input(3, -5, '$', '%'));
 		CHECK_NE(a,check_input(3, 5, '@', '-'));
