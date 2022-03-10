@@ -3,6 +3,8 @@
 #include <stdexcept>
 #include <iostream>
 #include "mat.hpp"
+#include <vector>
+
 
 using namespace std;
 using namespace ariel;
@@ -46,7 +48,8 @@ string fill(int row, int col, char a, char b)
     int tRow = row; // temp val that contain row num 
     int tCol = col; // temp val that contain col num
 
-    char mat[row][col]; // need to fill it
+    vector<vector<char>> vec( a , vector<char> (b)); 
+
     char sigh = a;    // init the char
     string str;         // the final string that we're return
 
@@ -55,14 +58,14 @@ string fill(int row, int col, char a, char b)
         // Fill the first row:
         for (i = sCol; i < col; i++)
         {
-            mat[sRow][i] = sigh;
+            vec[sRow][i] = sigh;
         }
         sRow++;
 
         // Fill the last column:
         for (i = sRow; i < row; i++)
         {
-            mat[i][col - 1] = sigh;
+            vec[i][col - 1] = sigh;
         }
         col--;
 
@@ -71,7 +74,7 @@ string fill(int row, int col, char a, char b)
         {
             for (i = col - 1; i >= sCol; i--)
             {
-                mat[row - 1][i] = sigh;
+                vec[row - 1][i] = sigh;
             }
             row--;
         }
@@ -81,7 +84,7 @@ string fill(int row, int col, char a, char b)
         {
             for (i = row - 1; i >= sRow; i--)
             {
-                mat[i][sCol] = sigh;
+                vec[i][sCol] = sigh;
             }
             sCol++;
         }
@@ -95,7 +98,7 @@ string fill(int row, int col, char a, char b)
     {
         for (j = 0; j < tCol; j++)
         {
-            str += mat[i][j];
+            str += vec[i][j];
         }
         str += '\n';
     }
